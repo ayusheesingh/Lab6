@@ -41,11 +41,21 @@ public class FrontCompression {
             return "";
         }
 
-        /*
-         * Complete this function.
-         */
+        // split the string by new line
+        String[] splitString = corpus.split("/n");
+        String output = "";
 
-        return "";
+        String previousString = null;
+        for (int i = 0; i < splitString.length; i++) {
+            int cutBy = longestPrefix(splitString[i], previousString);
+            output += "" + cutBy;
+            output += " " + splitString[i].substring(0, cutBy + 1);
+            previousString = splitString[i];
+        }
+
+        // split output by new line
+        output.split("/n");
+        return output;
     }
 
     /**
@@ -79,10 +89,22 @@ public class FrontCompression {
      * @return the length of the common prefix between the two strings
      */
     private static int longestPrefix(final String firstString, final String secondString) {
-        /*
-         * Complete this function.
-         */
-        return 0;
+        //System.out.println("firstString: " + firstString);
+        //System.out.println("secondString: " + secondString);
+        int prefix = 0;
+        int last = firstString.length();
+        if (firstString == null || secondString == null) {
+            return 0;
+        }
+        if (firstString.length() > secondString.length()) {
+            last = secondString.length();
+        }
+        for (int i = 0; i < last; i++) {
+            while (firstString.substring(i, i + 1).equals(secondString.substring(i, i + 1))) {
+                prefix += 1;
+            }
+        }
+        return prefix;
     }
 
     /**
